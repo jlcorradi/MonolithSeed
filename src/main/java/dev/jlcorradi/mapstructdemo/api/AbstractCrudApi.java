@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Locale;
@@ -27,14 +28,14 @@ public abstract class AbstractCrudApi<D, K, S extends CrudService<D, K>> {
     private final S service;
 
     @PostMapping
-    public ResponseEntity<D> post(@RequestBody D request) {
+    public ResponseEntity<D> post(@Validated @RequestBody D request) {
         D dto = service.create(request);
         HttpUtils.addMessageHeader(MessageType.SUCCESS, RECORD_INSERTED_SUCCESSFULLY_MSG);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<D> put(@PathVariable("id") K id, @RequestBody D request) {
+    public ResponseEntity<D> put(@Validated @PathVariable("id") K id, @RequestBody D request) {
         D dto = service.update(id, request);
         HttpUtils.addMessageHeader(MessageType.SUCCESS, RECORD_UPDATED_SUCCESSFULLY_MSG);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
