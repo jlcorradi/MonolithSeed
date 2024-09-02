@@ -2,6 +2,7 @@ package dev.jlcorradi.monolithseed.api;
 
 import dev.jlcorradi.monolithseed.common.service.CrudService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,7 +16,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@RestController
+@Slf4j
 @RequiredArgsConstructor
 public abstract class AbstractCrudApi<D, K, S extends CrudService<D, K>> {
     public static final String SORT_PARAM_NAME = "sort";
@@ -29,6 +30,7 @@ public abstract class AbstractCrudApi<D, K, S extends CrudService<D, K>> {
 
     @PostMapping
     public ResponseEntity<D> post(@Validated @RequestBody D request) {
+        log.info("Posting Object: {}", request);
         D dto = service.create(request);
         HttpUtils.addMessageHeader(MessageType.SUCCESS, RECORD_INSERTED_SUCCESSFULLY_MSG);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
@@ -36,6 +38,7 @@ public abstract class AbstractCrudApi<D, K, S extends CrudService<D, K>> {
 
     @PutMapping("/{id}")
     public ResponseEntity<D> put(@Validated @PathVariable("id") K id, @RequestBody D request) {
+        log.info("Putting to id: {} - Object: {}", id, request);
         D dto = service.update(id, request);
         HttpUtils.addMessageHeader(MessageType.SUCCESS, RECORD_UPDATED_SUCCESSFULLY_MSG);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
@@ -49,6 +52,7 @@ public abstract class AbstractCrudApi<D, K, S extends CrudService<D, K>> {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<D> delete(@PathVariable("id") K id) {
+        log.info("Deleting object with id: {}", id);
         service.delete(id);
         HttpUtils.addMessageHeader(MessageType.SUCCESS, RECORD_DELETED_SUCCESSFULLY_MSG);
         return ResponseEntity.status(HttpStatus.OK).build();
