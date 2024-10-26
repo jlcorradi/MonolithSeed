@@ -15,7 +15,6 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@RestController
 @RequiredArgsConstructor
 public abstract class AbstractCrudApi<D, K, S extends CrudService<D, K>> {
     public static final String SORT_PARAM_NAME = "sort";
