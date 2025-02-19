@@ -9,12 +9,12 @@ import java.util.UUID;
 @Data
 @Entity
 public class KeyValuePair implements BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
-    @Enumerated(EnumType.STRING)
-    private KeyValuePairType type;
-    private String description;
-    private boolean active;
+  @Enumerated(EnumType.STRING)
+  private KeyValuePairType type;
+  private String description;
+  private boolean active;
 }

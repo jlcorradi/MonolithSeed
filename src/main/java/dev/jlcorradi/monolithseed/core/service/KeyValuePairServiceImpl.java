@@ -13,12 +13,12 @@ import java.util.UUID;
 
 @Service
 public class KeyValuePairServiceImpl
-        extends AbstractCrudService<KeyValuePairDTO, KeyValuePair, UUID, KeyValuePairRepository, KeyValuePairMapper>
-        implements KeyValuePairService {
+    extends AbstractCrudService<KeyValuePairDTO, KeyValuePair, UUID, KeyValuePairRepository, KeyValuePairMapper>
+    implements KeyValuePairService {
 
 
-    public KeyValuePairServiceImpl(KeyValuePairRepository repository, KeyValuePairMapper mapper,
-                                   List<CrudOperationEventHandler<KeyValuePair>> crudOperationEventHandlers) {
-        super(repository, mapper, crudOperationEventHandlers);
-    }
+  public KeyValuePairServiceImpl(KeyValuePairRepository repository, KeyValuePairMapper mapper,
+                                 List<CrudOperationEventHandler<KeyValuePair>> crudOperationEventHandlers) {
+    super(repository, mapper, crudOperationEventHandlers);
+  }
 }

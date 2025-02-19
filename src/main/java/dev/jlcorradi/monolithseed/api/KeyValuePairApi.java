@@ -10,7 +10,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping(EndPointConstants.KEY_VALUE_PAIRS)
 public class KeyValuePairApi extends AbstractCrudApi<KeyValuePairDTO, UUID, KeyValuePairService> {
-    public KeyValuePairApi(KeyValuePairService service) {
-        super(service);
-    }
+  public KeyValuePairApi(KeyValuePairService service) {
+    super(service);
+  }
 }

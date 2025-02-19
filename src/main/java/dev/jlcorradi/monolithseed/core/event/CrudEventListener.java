@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface CrudEventListener {
-    CrudOperation[] supports() default {CrudOperation.UPDATE, CrudOperation.INSERT, CrudOperation.DELETE};
+  CrudOperation[] supports() default {CrudOperation.UPDATE, CrudOperation.INSERT, CrudOperation.DELETE};
 
-    int order() default Integer.MAX_VALUE;
+  int order() default Integer.MAX_VALUE;
 }

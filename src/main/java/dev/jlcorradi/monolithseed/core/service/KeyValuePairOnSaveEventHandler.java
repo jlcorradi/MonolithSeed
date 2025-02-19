@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 @Component
 @CrudEventListener(supports = CrudOperation.INSERT)
 public class KeyValuePairOnSaveEventHandler implements CrudOperationEventHandler<KeyValuePair> {
-    @Override
-    public void onPerformCrudOperation(Object source, KeyValuePair target, CrudOperation operation) {
-        log.info("Will Save entity: {} target", target);
-    }
+  @Override
+  public void onPerformCrudOperation(Object source, KeyValuePair target, CrudOperation operation) {
+    log.info("Will Save entity: {} target", target);
+  }
 
 }

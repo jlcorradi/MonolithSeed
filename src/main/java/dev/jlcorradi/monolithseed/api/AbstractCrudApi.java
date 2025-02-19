@@ -26,6 +26,17 @@ public abstract class AbstractCrudApi<D, K, S extends CrudService<D, K>> {
 
     private final S service;
 
+    public static Sort resolveSort(String sort) {
+        Pattern pattern = Pattern.compile("(.*)\\((.*)\\)");
+        Matcher matcher = pattern.matcher(sort);
+        if (!matcher.matches()) {
+            return Sort.by(Sort.Order.asc(sort));
+        }
+        String result = matcher.group(2).toUpperCase(Locale.ROOT);
+        return "ASC".equals(result) ? Sort.by(Sort.Order.asc(matcher.group(1))) :
+                Sort.by(Sort.Order.desc(matcher.group(1)));
+    }
+
     @PostMapping
     public ResponseEntity<D> post(@Validated @RequestBody D request) {
         D dto = service.create(request);
@@ -64,16 +75,5 @@ public abstract class AbstractCrudApi<D, K, S extends CrudService<D, K>> {
 
         Page<D> dto = service.list(pageRequest);
         return ResponseEntity.ok(dto);
-    }
-
-    public static Sort resolveSort(String sort) {
-        Pattern pattern = Pattern.compile("(.*)\\((.*)\\)");
-        Matcher matcher = pattern.matcher(sort);
-        if (!matcher.matches()) {
-            return Sort.by(Sort.Order.asc(sort));
-        }
-        String result = matcher.group(2).toUpperCase(Locale.ROOT);
-        return "ASC".equals(result) ? Sort.by(Sort.Order.asc(matcher.group(1))) :
-                Sort.by(Sort.Order.desc(matcher.group(1)));
     }
 }

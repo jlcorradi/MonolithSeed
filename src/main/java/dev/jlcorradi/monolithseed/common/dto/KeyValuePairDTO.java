@@ -7,11 +7,11 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record KeyValuePairDTO(
-        UUID id,
-        @NotNull
-        KeyValuePairType type,
-        @NotEmpty
-        String description,
-        boolean active
+    UUID id,
+    @NotNull
+    KeyValuePairType type,
+    @NotEmpty
+    String description,
+    boolean active
 ) {
 }

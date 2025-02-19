@@ -11,22 +11,22 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HttpUtils {
 
-    public static void addCustomHeader(String headerName, Object value) {
-        getHttpServletResponse()
-                .setHeader(headerName, value.toString());
-    }
+  public static void addCustomHeader(String headerName, Object value) {
+    getHttpServletResponse()
+        .setHeader(headerName, value.toString());
+  }
 
-    public static void addMessageHeader(MessageType messageType, String message) {
-        getHttpServletResponse()
-                .setHeader(messageType.getHeader(), message);
-    }
+  public static void addMessageHeader(MessageType messageType, String message) {
+    getHttpServletResponse()
+        .setHeader(messageType.getHeader(), message);
+  }
 
 
-    private static HttpServletResponse getHttpServletResponse() {
-        HttpServletResponse response =
-                ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))
-                        .getResponse();
-        assert response != null;
-        return response;
-    }
+  private static HttpServletResponse getHttpServletResponse() {
+    HttpServletResponse response =
+        ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))
+            .getResponse();
+    assert response != null;
+    return response;
+  }
 }
