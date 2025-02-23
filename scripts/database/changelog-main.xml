@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+  <changeSet  id="1740320424662-1"  author="jorgecorradi (generated)">
+    <createTable tableName="key_value_pair">
+      <column name="id" type="varchar(36)">
+        <constraints nullable="false" primaryKey="true" />
+      </column>
+      <column name="active" type="boolean" defaultValue="true" />
+      <column name="type" type="varchar(40)">
+        <constraints nullable="false" />
+      </column>
+      <column name="description" type="varchar(255)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+
+</databaseChangeLog>

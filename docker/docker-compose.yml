@@ -1,0 +1,28 @@
+services:
+  db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: s3cr3t
+      MYSQL_DATABASE: monolith_db
+      MYSQL_USER: monolith_user
+      MYSQL_PASSWORD: s3cr3t
+
+  liquibase:
+    build:
+      dockerfile: Liquibase.Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - "../scripts/database:/liquibase/changelog"
+    command: >
+      --url=jdbc:mysql://db:3306/monolith_db
+      --driver=com.mysql.cj.jdbc.Driver
+      --username=monolith_user
+      --password=s3cr3t
+      --contexts=production
+      --changelog-file=changelog-main.xml
+      --search-path=/liquibase/changelog
+      update
+      
