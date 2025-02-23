@@ -1,4 +1,4 @@
-package dev.jlcorradi.monolithseed.core.service;
+package dev.jlcorradi.monolithseed.core.eventhandler;
 
 import dev.jlcorradi.monolithseed.core.entities.KeyValuePair;
 import dev.jlcorradi.monolithseed.core.event.CrudEventListener;
