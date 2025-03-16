@@ -44,11 +44,11 @@ public abstract class AbstractCrudService<D, T extends BaseEntity, K, R extends 
   @Override
   @Transactional
   public D create(D dto) {
-    T entity = mapper.dto2Entity(getInstanceOfTypeParameter(super.getClass(), ENTITY_GENERIC_PARAM_IDX), dto);
+    T entity = mapper.toEntity(getInstanceOfTypeParameter(super.getClass(), ENTITY_GENERIC_PARAM_IDX), dto);
     performValidations(entity);
     T newlySaved = repository.save(entity);
     notifyListeners(newlySaved, CrudOperation.INSERT);
-    return mapper.entity2Dto(newlySaved);
+    return mapper.toDto(newlySaved);
   }
 
   @Transactional
@@ -56,16 +56,16 @@ public abstract class AbstractCrudService<D, T extends BaseEntity, K, R extends 
   public D update(K id, D dto) {
     T entity = repository.findById(id).orElseThrow(EntityNotFoundException::new);
     performValidations(entity);
-    T newlyUpdated = mapper.dto2Entity(entity, dto);
+    T newlyUpdated = mapper.toEntity(entity, dto);
     T updated = repository.save(newlyUpdated);
     notifyListeners(newlyUpdated, CrudOperation.UPDATE);
-    return mapper.entity2Dto(updated);
+    return mapper.toDto(updated);
   }
 
   @Override
   public D get(K id) {
     return repository.findById(id)
-        .map(mapper::entity2Dto)
+        .map(mapper::toDto)
         .orElseThrow(EntityNotFoundException::new);
   }
 
@@ -81,7 +81,7 @@ public abstract class AbstractCrudService<D, T extends BaseEntity, K, R extends 
   @Override
   public Page<D> list(PageRequest pageRequest) {
     Page<T> all = repository.findAll(pageRequest);
-    List<D> content = all.getContent().stream().map(mapper::entity2Dto).toList();
+    List<D> content = all.getContent().stream().map(mapper::toDto).toList();
     return new PageImpl<>(content, pageRequest, all.getTotalElements());
   }
 
