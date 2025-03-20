@@ -63,6 +63,7 @@ public abstract class AbstractCrudService<D, T extends BaseEntity, K, R extends 
   }
 
   @Override
+  @Transactional
   public D get(K id) {
     return repository.findById(id)
         .map(mapper::toDto)
